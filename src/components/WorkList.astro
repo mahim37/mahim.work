@@ -1,0 +1,23 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  entries: CollectionEntry<'work'>[];
+  class?: string;
+}
+
+const { entries, class: className } = Astro.props;
+const work = [...entries].sort((a, b) => a.data.order - b.data.order);
+---
+<ul class:list={['work', className]}>
+  {work.map((w) => (
+    <li>
+      <a class="t" href={`/work/${w.id}/`}>{w.data.title}</a>
+      <span class="y">{w.data.period ?? w.data.date.getUTCFullYear()}</span>
+      <span class="d">
+        {w.data.description}
+        {w.data.demo && <> <a href={w.data.demo}>Live demo</a>.</>}
+      </span>
+    </li>
+  ))}
+</ul>

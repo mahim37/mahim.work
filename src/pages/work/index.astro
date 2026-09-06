@@ -1,0 +1,16 @@
+---
+import Base from '../../layouts/Base.astro';
+import WorkList from '../../components/WorkList.astro';
+import { getCollection } from 'astro:content';
+import { published } from '../../lib/site';
+
+const work = await getCollection('work', published);
+---
+<Base title="Work" description="Case studies: systems I built, the trade-offs, and what I would do differently." path="/work/" long>
+  <h1 class="title">Work</h1>
+  <p class="lede">
+    Case studies, each in the same shape: the context, the problem, the design and its trade-offs,
+    what broke and what I would do differently, and the outcome.
+  </p>
+  <WorkList entries={work} class="gap" />
+</Base>

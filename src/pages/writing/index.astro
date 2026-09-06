@@ -1,0 +1,24 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { fmtShort, published } from '../../lib/site';
+
+const work = await getCollection('work', published);
+const posts = await getCollection('writing', published);
+const items = [
+  ...work.map((e) => ({ title: e.data.title, date: e.data.date, href: `/work/${e.id}/` })),
+  ...posts.map((e) => ({ title: e.data.title, date: e.data.date, href: `/writing/${e.id}/` })),
+].sort((a, b) => +b.date - +a.date);
+---
+<Base title="Writing" description="Case studies and posts by Mahim Gupta, newest first." path="/writing/" long>
+  <h1 class="title">Writing</h1>
+  <p class="lede">Case studies and posts, newest first.</p>
+  <ul class="posts gap">
+    {items.map((i) => (
+      <li>
+        <a href={i.href}>{i.title}</a>
+        <span class="dt">{fmtShort(i.date)}</span>
+      </li>
+    ))}
+  </ul>
+</Base>

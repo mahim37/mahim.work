@@ -1,0 +1,26 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import Prose from '../../layouts/Prose.astro';
+import { published, entryLinks } from '../../lib/site';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('work', published);
+  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+type Props = { entry: CollectionEntry<'work'> };
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+---
+<Prose
+  title={d.title}
+  description={d.description}
+  path={`/work/${entry.id}/`}
+  date={d.date}
+  updated={d.updated}
+  kind="Case study"
+  links={entryLinks(d)}
+>
+  <Content />
+</Prose>

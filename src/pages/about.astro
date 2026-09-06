@@ -1,0 +1,79 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../lib/site';
+---
+<Base
+  title="About"
+  description="Mahim Gupta: backend engineer in Bengaluru. FNCR at Fischer Jordan, drone forensics at DRDO, IIIT Pune."
+  path="/about/"
+  long
+>
+  <article>
+    <h1 class="title">About</h1>
+    <div class="prose gap">
+      <p>
+        I'm Mahim Gupta, a backend engineer in Bengaluru. Since May 2024 I have built and run the
+        backend of <a href="https://fncr.com">FNCR</a>, a US financing platform for small and mid-market
+        businesses, at <a href="https://fischerjordan.com">Fischer Jordan</a>, working remotely: Django REST Framework
+        services, ten-plus LLM agents integrated into one product, partner API integrations, a
+        migration from AWS to Azure, and the staging-to-production release workflow.
+      </p>
+      <p>
+        Before that I was a research intern at DRDO's Defence Institute of Advanced Technology in
+        Pune, reverse-engineering drone flight-log formats: recovering a CRC64 checksum and building
+        a toolkit that decodes DJI, Parrot and Anafi telemetry for forensic analysis. I studied
+        computer science at IIIT Pune, with an honours track in machine learning.
+      </p>
+      <p>
+        What I care about in a backend: boundaries that survive contact with production, idempotent
+        retries, and enough observability to know what an LLM did after the fact. I am learning Go.
+      </p>
+    </div>
+
+    <h2 class="label">Timeline</h2>
+    <ul class="timeline">
+      <li>
+        <span class="y">2024–now</span>
+        <span>Software Developer, Fischer Jordan, remote. The FNCR backend: Django REST, LLM agents, partner integrations, AWS to Azure, release workflow.</span>
+      </li>
+      <li>
+        <span class="y">2023</span>
+        <span>R&amp;D intern, Defence Institute of Advanced Technology (DRDO), Pune. Drone flight-log forensics.</span>
+      </li>
+      <li>
+        <span class="y">2023</span>
+        <span>Dynamic Portfolio Analyst, a student project: LSTM forecasting with FinBERT sentiment.</span>
+      </li>
+      <li>
+        <span class="y">2021–2025</span>
+        <span>B.Tech in Computer Science, IIIT Pune, with an honours track in machine learning. President of the robotics club.</span>
+      </li>
+    </ul>
+
+    <h2 class="label">Hackathons</h2>
+    <p class="small">
+      Second place at the CoinDCX 2024 hackathon, from 250-plus submissions. Third at ETHIndia
+      2023, from 480-plus. Top-eight finalist in GeeksforGeeks' Solving for India, from 50,000-plus
+      students. The repos are on <a href={site.github}>GitHub</a>.
+    </p>
+
+    <h2 class="label">Research</h2>
+    <p class="small">
+      Co-author of “Drone Forensics: A Deep Dive into Datasets and Tools”, submitted to the
+      International Journal of Electronic Security and Digital Forensics.
+    </p>
+
+    <h2 class="label">Contact</h2>
+    <p class="small">
+      Email is best: <a href={`mailto:${site.email}`}>{site.email}</a>. For contract work, send a
+      paragraph about the problem and the stack it runs on. Also on <a href={site.github}>GitHub</a> and <a href={site.linkedin}>LinkedIn</a>.
+    </p>
+
+    <h2 class="label">About this site</h2>
+    <p class="small">
+      Written by me. I use LLMs to write code and to critique drafts, not to write the prose.
+      Built with <a href="https://astro.build">Astro</a> from markdown, one stylesheet, no
+      JavaScript except the rustyWings embed, no analytics, no cookies. <a href={site.repo}>Source</a>.
+    </p>
+  </article>
+</Base>

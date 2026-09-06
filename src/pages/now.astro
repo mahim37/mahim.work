@@ -1,0 +1,16 @@
+---
+import Base from '../layouts/Base.astro';
+import { fmtMonth, isoDay } from '../lib/site';
+import * as now from '../content/now.md';
+
+const updated = new Date(now.frontmatter.updated);
+---
+<Base title="Now" description="What Mahim Gupta is building, learning and looking for this month." path="/now/" long>
+  <article>
+    <p class="kicker">Updated <time datetime={isoDay(updated)}>{fmtMonth(updated)}</time></p>
+    <h1 class="title">Now</h1>
+    <div class="prose gap">
+      <now.Content />
+    </div>
+  </article>
+</Base>

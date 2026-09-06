@@ -1,0 +1,68 @@
+---
+import Base from '../layouts/Base.astro';
+import WorkList from '../components/WorkList.astro';
+import { getCollection } from 'astro:content';
+import { site, fmtMonth, fmtShort, published } from '../lib/site';
+import * as now from '../content/now.md';
+
+const work = await getCollection('work', published);
+const posts = (await getCollection('writing', published))
+  .sort((a, b) => +b.data.date - +a.data.date)
+  .slice(0, 6);
+const nowUpdated = new Date(now.frontmatter.updated);
+---
+<Base path="/">
+  <h1>Backend engineer shipping LLM‑integrated production systems.</h1>
+
+  <p>
+    I own the backend of <a href="https://fncr.com">FNCR</a>, a US financing platform for small
+    and mid-market businesses, built at <a href="https://fischerjordan.com">Fischer Jordan</a>. I
+    work remotely from Bengaluru. That means Django REST services, ten-plus LLM agents wired into
+    one product, a live AWS-to-Azure migration, and the release pipeline. Before that,
+    drone-forensics R&amp;D at DRDO, and computer science with an ML honours track at IIIT Pune.
+  </p>
+
+  <p class="muted small">
+    Open to backend and AI-engineering roles, and to a small number of remote contracts. <a href="#hire">Work with me.</a>
+  </p>
+
+  {work.length > 0 && (
+    <>
+      <h2 class="label" id="work">Selected work</h2>
+      <WorkList entries={work} />
+    </>
+  )}
+
+  {posts.length > 0 && (
+    <>
+      <h2 class="label" id="writing">Writing</h2>
+      <ul class="posts">
+        {posts.map((p) => (
+          <li>
+            <a href={`/writing/${p.id}/`}>{p.data.title}</a>
+            <span class="dt">{fmtShort(p.data.date)}</span>
+          </li>
+        ))}
+      </ul>
+      <p class="small muted gap-sm"><a href="/writing/">All writing</a></p>
+    </>
+  )}
+
+  <h2 class="label" id="now">Now</h2>
+  <p class="small">
+    {now.frontmatter.summary} <a class="muted" href="/now/">Updated {fmtMonth(nowUpdated)}.</a>
+  </p>
+
+  <h2 class="label" id="hire">Work with me</h2>
+  <p class="small">
+    Remote contracts, a few at a time: greenfield Django REST backends, LLM features that have to
+    survive production, and cloud migrations. Send a paragraph about the problem to <a href={`mailto:${site.email}`}>{site.email}</a>.
+  </p>
+
+  <h2 class="label" id="elsewhere">Elsewhere</h2>
+  <p class="small">
+    Second at the CoinDCX 2024 hackathon and third at ETHIndia 2023, each against hundreds of
+    teams. Co-author of “Drone Forensics: A Deep Dive into Datasets and Tools”, submitted to
+    IJESDF. Ran the IIIT Pune robotics club. More on the <a href="/about/">about page</a>.
+  </p>
+</Base>

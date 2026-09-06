@@ -1,0 +1,36 @@
+---
+import Base from './Base.astro';
+import { fmtMonth, isoDay, type Link } from '../lib/site';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  date: Date;
+  updated?: Date;
+  /** "Case study" or "Post". */
+  kind: string;
+  links?: Link[];
+}
+
+const { title, description, path, date, updated, kind, links = [] } = Astro.props;
+---
+<Base title={title} description={description} path={path} long type="article" published={date} updated={updated}>
+  <article>
+    <p class="kicker">{kind}</p>
+    <h1 class="title">{title}</h1>
+    <p class="lede">{description}</p>
+    <p class="meta">
+      <time datetime={isoDay(date)}>{fmtMonth(date)}</time>
+      {updated && <> · Updated <time datetime={isoDay(updated)}>{fmtMonth(updated)}</time></>}
+      {links.map((l) => <> · <a href={l.href}>{l.label}</a></>)}
+    </p>
+    <div class="prose">
+      <slot />
+    </div>
+  </article>
+  <nav class="backnav" aria-label="Back">
+    <a href="/">← Home</a>
+    <a href="/writing/">All writing</a>
+  </nav>
+</Base>

@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { site } from '../lib/site';
+import Analytics from '@vercel/analytics/astro';
 
 interface Props {
   /** Page title without the site name. Omit on the home page. */
@@ -84,5 +85,6 @@ const current = (href: string) => path.startsWith(href);
         <span>Bengaluru · IST</span>
       </footer>
     </div>
+    <Analytics />
   </body>
 </html>
